@@ -1,0 +1,17 @@
+#sortable-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+      }
+
+      .draggable-letter {
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
+        background-color: #0074d9;
+        padding: 10px;
+        margin-right: 10px;
+        cursor: grab;
+        user-select: none;
+      }

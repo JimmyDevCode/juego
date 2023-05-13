@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sortable.js Horizontal</title>
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+    /> -->
+     <!-- Bootstrap CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row justify-content-center mt-5">
+        <div class="col">
+          <h1 class="text-center">JUEGO DE PALABRAS</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div id="sortable-container"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <p class="text-center text-danger" id="message"></p>
+        </div>
+      </div>
+      <!-- <div class="row justify-content-center">
+        <div class="col">
+          <button class="btn btn-success"" id="next-word-button">Siguiente Palabra</button>
+        </div>
+      </div> -->
+      <div class="d-grid gap-2 d-md-flex">
+        <button class="btn btn-primary me-md-2" type="button" id="next-word-button">Siguiente Palabra</button>
+      </div>
+    </div>
+   
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.13.0/Sortable.min.js"></script>
+    <script>
+
+const shuffleLetters = () => {
+        letters.sort(() => Math.random() - 0.5);
+};
+      // Selecciona los elementos HTML necesarios.
+      const container = document.querySelector("#sortable-container");
+      const message = document.querySelector("#message");
+      const nextWordButton = document.querySelector("#next-word-button");
+
+      // Define las palabras para el juego.
+      const WORDS = ["HOLA", "MUNDO", "HTML", "CSS", "JAVASCRIPT"];
+
+      // Inicializa la palabra actual y las letras.
+      let currentWordIndex = Math.floor(Math.random() * WORDS.length);
+      let currentWord = WORDS[currentWordIndex];
+      let letters = currentWord.split("");
+      shuffleLetters();
+
+      // Función que crea los elementos div para las letras.
+      const createLetterDivs = () => {
+        // Elimina los elementos anteriores.
+        container.innerHTML = "";
+
+        // Crea nuevos elementos div.
+        letters.forEach((letter) => {
+          const letterDiv = document.createElement("div");
+          letterDiv.classList.add("draggable-letter");
+          letterDiv.innerHTML = letter;
+          container.appendChild(letterDiv);
+        });
+      };
+
+      // Función que desordena las letras.
+      
+
+  // Función que verifica si las letras están ordenadas correctamente.
+  const checkOrder = () => {
+    
+    const currentOrder = Array.from(container.children).map(
+      (el) => el.innerHTML
+    );
+    if (currentOrder.join("").toUpperCase() === currentWord) {
+      message.innerHTML = "¡Correcto!";
+    } else {
+      message.innerHTML = "Incorrecto";
+    }
+  };
+
+  // Inicializa el juego.
+  createLetterDivs();
+  shuffleLetters();
+  checkOrder();
+  
+  Sortable.create(container, {
+    animation: 150,
+    direction: "horizontal",
+    onEnd: checkOrder,
+  });
+  container.addEventListener("dragend", checkOrder);
+
+  // Actualiza la palabra cuando se hace clic en el botón "Siguiente Palabra".
+  nextWordButton.addEventListener("click", () => {
+    currentWordIndex = (currentWordIndex + 1) % WORDS.length;
+    currentWord = WORDS[currentWordIndex];
+    letters = currentWord.split("");
+    shuffleLetters();
+    createLetterDivs();
+    checkOrder();
+  });
+</script>
+  </body>
+</html>
