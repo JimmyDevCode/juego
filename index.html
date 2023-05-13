@@ -51,7 +51,17 @@ const shuffleLetters = () => {
       const nextWordButton = document.querySelector("#next-word-button");
 
       // Define las palabras para el juego.
-      const WORDS = ["HOLA", "MUNDO", "HTML", "CSS", "JAVASCRIPT"];
+      const WORDS = [
+
+"HOLA", "AMOR", "CASA", "TIEMPO", "VIDA", "MUNDO", "HOMBRE", "MUJER", "NIÑO",
+
+      "FAMILIA", "COMIDA", "AGUA", "AIRE", "SOL", "LUNA", "ESTRELLA", "COCHE", "TREN",
+
+      "AVIÓN", "BARCO", "CIUDAD", "PAÍS", "AMIGO", "TRABAJO", "DINERO", "VERDAD", "FELICIDAD",
+
+      "TRISTEZA", "AMOR", "ODIO", "ALEGRÍA", "ESPERANZA", "MIEDO", "SUEÑO", "DOLOR",
+
+      "SALUD", "ENFERMEDAD", "CANCER", "MUERTE", "ARTE", "MÚSICA", "LIBRO"];
 
       // Inicializa la palabra actual y las letras.
       let currentWordIndex = Math.floor(Math.random() * WORDS.length);
