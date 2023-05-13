@@ -6,11 +6,11 @@
       }
 
       .draggable-letter {
-        font-size: 60px;
+        font-size: 40px;
         font-weight: bold;
         color: white;
         background-color: #0074d9;
-        padding: 30px;
+        padding: 20px;
         margin-right: 10px;
         cursor: grab;
         user-select: none;
